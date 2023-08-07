@@ -1,0 +1,4 @@
+#tab-buttons {
+    display: flex;
+    justify-content: stretch;
+}

@@ -1,0 +1,18 @@
+:root {
+    --nsw-brand-dark: #002664;
+}
+
+body {
+    font-family: 'Public Sans', sans-serif;
+}
+
+.nsw-brand-dark {
+    color: #fff !important;
+    background-color: #002664 !important
+}
+
+.nsw-brand-accent,
+.nsw-brand-accent-hover:hover {
+    color: #fff !important;
+    background-color: #D7153A !important
+}

@@ -1,0 +1,108 @@
+#map-container {
+    height: 400px;
+}
+
+.leaflet-pane {
+    z-index: 1;
+}
+
+.leaflet-top {
+    z-index: 2;
+}
+
+.control-div {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.zoom-control {
+    padding: 0px;
+    cursor: pointer;
+}
+
+.zoom-control img {
+    box-sizing: border-box;
+    padding: 4px;
+    width: 33px;
+    border: 2px solid rgba(0, 0, 0, .2);
+    border-radius: 2px
+}
+
+.zoom-control:hover {
+    background-color: #f4f4f4;
+}
+
+.marker-info {
+    min-width: 150px
+}
+
+.marker-info h4 {
+    margin: 0 0 5px;
+    color: red;
+}
+
+.marker-legend {
+    line-height: 18px;
+    color: #555;
+}
+
+.marker-legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.marker-legend-title {
+    text-align: center;
+}
+
+.leaflet-popup-content {
+    min-width: 250px;
+    width: unset !important;
+}
+
+#popup-table {
+    white-space: nowrap;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#popup-table td,
+#popup-table th {
+    border: 1px solid #ddd;
+    padding: 2px;
+    text-align: center;
+}
+
+#popup-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#popup-table tr:hover {
+    background-color: #ddd;
+}
+
+#popup-table th {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: left;
+    background-color: #002664;
+    color: white;
+    text-align: center;
+}
+
+.leaflet-popup-scrolled {
+    margin: 8px;
+    padding: 16px;
+    width: 300px;
+}
+
+.easyPrintHolder .print-class {
+    background-image: url("../images/print.svg");
+}

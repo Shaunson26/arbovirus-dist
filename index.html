@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&amp;display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./src/w3.css">
+
+    <!-- <script type="text/javascript" src="./dev/packages/jquery.min.js"></script>
+    <script type="text/javascript" src="./dev/packages/selectize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dev/packages/selectize.default.min.css" />
+    <script type="text/javascript" src="./dev/packages/ion.rangeSlider.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dev/packages/ion.rangeSlider.min.css" />
+    <script type="text/javascript" src="./dev/packages/leaflet.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dev/packages/leaflet.css" />
+    <script type="text/javascript" src="./dev/packages/leaflet-easyprint_2.1.9_dist_bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dev/packages/leaflet-easyprint_2.1.9_libs_leaflet.min.css" />
+    <script type="text/javascript" src="./dev/packages/plotly-custom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" type="text/css" href="./dev/packages/datatables.min.css" />
+    <script type="text/javascript" src="./dev/packages/datatables.min.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js" integrity="sha512-kZsqvmw94Y8hyhwtWZJvDtobwQ9pLhF1DuIvcqSuracbRn6WJs1Ih+04fpH/8d1CFKysp7XA1tR0Aa2jKLTQUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" integrity="sha512-NWCafukXClS6fKch6bSMl/WvPzZrD1OGMf1oMAnFYXSSKZ7hgeswls+r4SdK4bFJauVwmvFf7HlMwji2TsjROA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easyprint@2.1.9/dist/bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easyprint@2.1.9/libs/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.25.1/plotly.min.js" integrity="sha512-BJxOxAwyvENDDMZsR1ZC3BJ/ZJv6x2bzPVWgyvNe9mUGiPhey0xE9wTJ/C+hl2qK9RIm5ACFg+nmSt3NbqIWXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.1/apexcharts.min.js" integrity="sha512-Gpg0M5UOTFSHGglemXUOUzL1LyO8MT0fxmEAjGN8jNlY6oSOsLerF1/vuXrqJXKyV5QIay12trwDDhmRJHZisA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/b-2.4.1/b-html5-2.4.1/datatables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.6/b-2.4.1/b-html5-2.4.1/datatables.min.js"></script>
+
+    <link rel="stylesheet" href="./src/arbovirus.css">
+    <link rel="stylesheet" type="text/css" href="./src/tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="./src/selectors/selectors.css" />
+    <link rel="stylesheet" type="text/css" href="./src/map/leaflet-map.css" />
+    <link rel="stylesheet" type="text/css" href="./src/chart/plotly-chart.css" />
+    <link rel="stylesheet" type="text/css" href="./src/table/data-table.css" />
+    <title>Arbovirus dashboard</title>
+</head>
+
+<body>
+    <div class="w3-container">
+        <h3>Draft Arbovirus data explorer</h3>
+        <p class="w3-small">This page should live within a NSW Digital page</p>
+    </div>
+
+    <!-- page container -->
+    <div class='viz-container w3-container' style="max-width: 1000px;">
+
+        <!-- Selector container -->
+        <div id="selector-container" class="w3-card-4 w3-section">
+
+            <div class="w3-row w3-padding-24">
+
+                <!-- year/file selector -->
+                <div class="w3-container w3-col m3 l3">
+                    <label for="year-selector">Year:</label>
+                    <select id="year-selector">
+                    </select>
+                </div>
+
+                <!-- indicator selector -->
+                <div class="w3-container w3-col m3 l3">
+                    <label for="'measure-selector">Measure:</label>
+                    <select name="measure-selector" id="measure-selector">
+                    </select>
+                </div>
+
+                <div class="w3-container w3-col m6 l6">
+                    <div style="display: flex;justify-content: space-between;align-items: end">
+                        <label for="indicator-selector">Indicator(s):</label>
+                        <span class="w3-small">Select all</Select></span>
+                    </div>
+                    
+                    <select name="indicator-selector" id="indicator-selector">
+                    </select>
+                </div>
+
+
+            </div>
+
+            <!-- date selector -->
+            <div class="w3-row">
+                <div id="map-date-slider-container-top" class="w3-col m10 l10">
+                    <div class="w3-container">
+                        <label for="map-date-slider">Reporting week:</label>
+                    </div>
+                    <div id="map-date-slider-container">
+                        <input type="text" id="map-date-slider" name="map-date-slider" value="" />
+                    </div>
+                </div>
+                
+                <!-- site type selector -->
+                <div class="w3-container w3-col m2 l2">
+                    <label for="site-type-selector">Site type:</label>
+                    <select name="site-type-selector" id="site-type-selector">
+                    </select>
+                </div>
+            </div>
+
+            <!-- location selector -->
+            <div class="w3-row">
+                <div class="w3-container w3-section w3-col m12 l12" id="location-selector-container">
+                    <label for="location-selector">Location:</label>
+                    <select name="location-selector" id="location-selector">
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Viz container -->
+        <div class="w3-card-4">
+
+            <!-- tab container -->
+            <div id="tab-buttons" class="w3-bar nsw-brand-dark">
+                <button class="w3-bar-item w3-button nsw-brand-accent-hover nsw-brand-accent"
+                    tab-id='map-tab'>Map</button>
+                <button class="w3-bar-item w3-button nsw-brand-accent-hover" tab-id='chart-tab-by-indicator'>Chart<div
+                        class="w3-tiny">indicators in location</div></button>
+                <button class="w3-bar-item w3-button nsw-brand-accent-hover" tab-id='chart-tab-by-location'>Chart <div
+                        class="w3-tiny">indicator by locations</div></button>
+
+                <button class="w3-bar-item w3-button nsw-brand-accent-hover"
+                    tab-id='chart-tab-by-indicator-heatmap'>Heatmap<div class="w3-tiny">indicator in location</div>
+                </button>
+                <button class="w3-bar-item w3-button nsw-brand-accent-hover" tab-id='table-tab'>Table</button>
+            </div>
+
+            <!-- map -->
+            <div id="map-tab" class="tab" style="display:none;">
+                <div class="">
+                    <div id="map-container"></div>
+                </div>
+            </div>
+
+            <!-- chart -->
+            <div id="chart-tab-by-indicator" class="tab" style="display:none;">
+                <div class="w3-row">
+                    <div class="w3-padding">
+                        <div id="chart-container-by-indicator" class="chart-container" style="width:100%;height:400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chart-tab-by-location" class="tab" style="display:none;">
+                <div class="w3-row">
+                    <div class="w3-padding">
+                        <div id="chart-container-by-location" class="chart-container" style="width:100%;height:400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="chart-tab-by-indicator-heatmap" class="tab" style="display:none;">
+                <div class="w3-row">
+                    <div class="w3-padding">
+                        <div id="chart-container-by-indicator-heatmap" class="chart-container"
+                            style="width:100%;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- table -->
+            <div id="table-tab" class="tab" style="display:none">
+                <div id="table-container" class="w3-container w3-padding-16"></div>
+            </div>
+        </div>
+
+        <div class="w3-card-4 w3-section">
+            <div class="w3-container">
+                <h4>Data description</h4>
+            </div>
+
+            <div id="mosquito-isolates-text" class="w3-container data-text" style="display:none">
+                <p>Whole grinds of collected mosquitoes are tested for arbovirus nucleic acids to determine the presence
+                    of arboviruses in mosquitoes.</p>
+                <ul>
+                    <li>The map shows detections of indictors across locations for a reporting week.</li>
+                    <li>Charts allow comparison of an indicator across locations, or indicators within a location</li>
+                    <li>The table allows export of the selected data</li>
+                </ul>
+            </div>
+            <div id="mosquito-abundance-text" class="w3-container data-text" style="display:none">
+                <p>Mosquito are trapped and counted across sites within locations, and the location average presented.
+                    Culex annulirostris and Aedes vigilax are vectors of interest for Ross River virus and Barmah Forest
+                    virus,
+                    Culex annulirostris is also a vector for Japanese encephalitis virus.
+                </p>
+                <ul>
+                    <li>The map shows averaged counts across locations for a reporting week.</li>
+                    <li>Charts allow comparison of an indicator across locations, or indicators within a location</li>
+                    <li>The table allows export of the selected data</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div id="loading-modal" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <p id="modal-text">Fetching data ...</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="./src/index.js" type="module"></script>
+</body>
+
+</html>
