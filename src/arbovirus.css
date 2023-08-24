@@ -1,5 +1,8 @@
 :root {
     --nsw-brand-dark: #002664;
+    --nsw-brand-accent: #D7153A;
+    --nsw-brand-light: #CBEDFD;
+    --nsw-brand-supplementary: #146CFD;
 }
 
 body {
@@ -15,4 +18,37 @@ body {
 .nsw-brand-accent-hover:hover {
     color: #fff !important;
     background-color: #D7153A !important
+}
+
+.viz-container {
+    max-width: 1400px;
+}
+
+.detection-card {
+    background-color: white;
+    padding: 16px 0px;
+}
+
+#lrw-visualisation-container {
+    height: 400px;
+}
+
+#lrw-map {
+    height: 100%;
+}
+
+#lrw-table {
+    display: none;
+    height: 100%;
+}
+
+#lrw-table-flex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: stretch;
+}
+
+#lrw-table-container {
+    height: 100%;
 }

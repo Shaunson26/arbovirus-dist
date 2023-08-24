@@ -1,0 +1,13 @@
+value,label,optgroup
+mos_sindbis,sindbis,Mosquito isolates
+mos_ross_river,ross river,Mosquito isolates
+mos_kunjin,kunjin,Mosquito isolates
+mos_edge_hill,edge hill,Mosquito isolates
+mos_barmah_forest,barmah forest,Mosquito isolates
+mos_stratford,stratford,Mosquito isolates
+mos_kokobera,kokobera,Mosquito isolates
+mos_unknown,unknown,Mosquito isolates
+mos_murray_valley_encephalitis,murray valley encephalitis,Mosquito isolates
+sc_murray_valley_encephalitis,murray valley encephalitis,Sentinel chickens
+sc_kunjin,kunjin,Sentinel chickens
+sc_japanese_encephalitis,japanese encephalitis,Sentinel chickens

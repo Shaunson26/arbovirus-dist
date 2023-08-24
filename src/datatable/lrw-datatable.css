@@ -1,0 +1,21 @@
+#lrw-data-table {
+    font-size: 12px;
+}
+
+#lrw-table {
+    font-size: 12px;
+}
+
+#lrw-data-table_wrapper {
+    overflow-x: scroll;
+}
+
+.dt-button {
+    border: unset !important;
+    border-radius: unset !important;
+    margin: 6px 0px;
+}
+
+.dt-button:focus{
+    outline: 2px solid #D7153A !important;
+}

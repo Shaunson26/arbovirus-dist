@@ -1,0 +1,93 @@
+<div class="w3-container">
+    <p>These displays provide the latest virus detection results from trapped mosquitos and sentinel chickens.
+        Whole grinds of collected mosquitoes are tested for arbovirus nucleic acids to determine the presence
+        of arboviruses in mosquitoes, while chickens are bled for detection of virus antibodies indicating exposure to these viruses.
+    </p>
+    <p>Latest reporting week: <b><span id="latest-report-week-date-value">&nbsp;</span></b></p>
+</div>
+
+<!-- data display container -->
+<div id="">
+
+    <div id="value-boxes" class="w3-row-padding w3-margin-bottom">
+
+        <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-center detection-card">
+                <div class="w3-xlarge" id="lrw-detection-value">&nbsp;</div>
+                <div>detection(s)</div>
+            </div>
+        </div>
+
+        <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-center detection-card">
+                <div class="w3-xlarge" id="lrw-location-detections-value">&nbsp;</div>
+                <div>location(s) with detection(s)</div>
+            </div>
+        </div>
+
+        <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-center detection-card">
+                <div class="w3-xlarge" id="lrw-extra-value">X</div>
+                <div>...</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="lrw-selectors" class="w3-row">
+
+        <div class="w3-quarter">
+            <div class="w3-container">
+                <label for="lrw-display" style="display: block;">Display:</label>
+
+                <select name="lrw-display" id="lrw-display">
+                    <option value="map">Map</option>
+                    <option value="table">Table</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="w3-threequarter">
+            <div class="w3-container">
+                <label for="lrw-indicators" style="display: block;">Indicators:<span class="w3-tiny"
+                        style="margin-left: 4px;">Clear selection to select all</span></label>
+                <select name="lrw-indicators" id="lrw-indicators"></select>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="lrw-visualisation-container" class="w3-container w3-padding-16">
+
+        <div id="lrw-map" class="w3-container"></div>
+
+        <div id="lrw-table">
+            <div id="lrw-table-flex">
+                <div id="lrw-table-selectors" class="w3-margin-bottom" style="display: flex;">
+
+                    <div class="lrw-checkbox">
+                        <input type="checkbox" id="lrw-include-counts" name="lrw-include-counts" disabled="true"
+                            checked>
+                        <label for="lrw-include-counts"> include mosquito abundances</label>
+                    </div>
+
+                    <div class="lrw-checkbox">
+                        <input type="checkbox" id="lrw-include-environmental-params"
+                            name="lrw-include-environmental-params" checked disabled="true">
+                        <label for="lrw-include-environmental-params"> include environmental paramaters
+                            <span class="tooltip"><b><sup>?</sup></b>
+                                <span class="tooltiptext w3-tiny">These function only if an indicator selection is
+                                    made.</span>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+                <div id="lrw-table-container"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

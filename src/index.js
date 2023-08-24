@@ -1,92 +1,78 @@
 // Initial and constants
+import { jsonColumnToRows, subsetObject, parseCsvText } from "./utils.js"
+import { locations } from "./data-configuration-files/locations.js"
 import * as tabs from "./tabs/tabs.js"
-import * as selectors from './selectors/selectors.js'
-import { fetchDataAndDo } from "./fetchDataAndDo.js"
-import { selectorDataAndIds } from "./selectorDataAndIds.js"
-import * as mapViz from "./map/leaflet-map.js"
-import * as chartViz from "./chart/plotly-chart.js"
-import * as tableViz from "./table/data-table.js"
+import * as selectors from "./selectors/lrw-selectors.js"
+import { updateValueBoxes } from "./value-boxes/value-boxes.js"
+import * as mapViz from "./maps/lrw-map.js"
+import * as tableViz from "./datatable/lrw-datatable.js"
 
-tabs.addTabButtonEventListeners('tab-buttons')
-
-//tabs.showTab('chart-tab-by-location')
+//tabs.showTab('explorer-tab')
 //tabs.showTab('chart-tab-by-indicator')
 //tabs.showTab('chart-tab-by-indicator-heatmap')
 
+tabs.initialiseTabButtons()
+var lrwMap = mapViz.initialiseMap()
+
 // Initial load
 $(function () {
-    fetchDataAndDo(function (data) {
-        selectors.updateLocationSelectorOptions(data)
-        $('button[tab-id="map-tab"').trigger('click')
-        updateEventListeners(data, () => updateThis(data))
-        updateThis(data)
+
+    getLatestData(function (data) {
+        updateEventListeners(data, updateStuff)
+        updateStuff(data)
     })
+
 })
 
-// year selector is special as it downloads data
-selectors.updateYearSelectorOnChange(() => {
-    fetchDataAndDo(function (data) {
-        //selectors.updateLocationSelectorOptions(data)
-        updateEventListeners(data, () => updateThis(data))
-        updateThis(data)
-    })
-})
+async function getLatestData(callback) {
+    const response = await fetch("./data/latest.csv");
+    let latestData = await response.text();
+    latestData = parseCsvText(latestData)
+    callback(latestData)
+}
 
-function updateThis(data) {
+function updateStuff(data) {
 
-    //console.log('updating viz')
+    let indicatorsSelected = $('#lrw-indicators')[0].selectize.items
 
-    let year = document.getElementById(selectorDataAndIds.selectorIds.year).value.replace(/-.*/i, '')
-    let indicatorSelector = $("#indicator-selector")[0].selectize
-    let siteTypeSelector = document.querySelector('#site-type-selector')
-    let dateSlider = $(`#map-date-slider`).data("ionRangeSlider")
-    let locationSelector = $("#location-selector")[0].selectize
+    if (indicatorsSelected.length > 0) {
 
-    //console.log('  updateThis:', year, indicatorSelector.items, siteTypeSelector.value, dateSlider.result.from_value)
+        $('#lrw-include-counts').attr('disabled', false)
+        $('#lrw-include-environmental-params').attr('disabled', false)
 
-    let config = {
-        year: year,
-        indicator: indicatorSelector.items,
-        siteType: siteTypeSelector.value,
-        date: dateSlider.result.from_value,
-        location: locationSelector.items
+        let requireMosCounts = $('#lrw-include-counts')[0].checked
+        let requireEnvParams = $('#lrw-include-environmental-params')[0].checked
+
+        let defaultCols = ['location', 'reportWeek', 'season']
+        let mosCounts = requireMosCounts ? ["total_mosquito", "culex_annulirostris", "aedes_vigilax"] : [];
+        let envParams = requireEnvParams ? ["rain_cumulative", "temperature_max_avg", "temperature_max", "temperature_min_avg", "temperature_min"] : [];
+
+        let keysToSubset =
+            [defaultCols, indicatorsSelected, mosCounts, envParams].reduce((a, c) => a.concat(c), [])
+
+        data =
+            data
+                .map(row => subsetObject(row, keysToSubset))
+    } else {
+
+        $('#lrw-include-counts').attr('disabled', true)
+        $('#lrw-include-counts').prop('checked', true)
+        $('#lrw-include-environmental-params').attr('disabled', true)
+        $('#lrw-include-environmental-params').prop('checked', true)
     }
 
-    let shownTab = tabs.getShownTab()
 
-    //if (shownTab == 'map-tab'){
-    //console.log('updatethis - map')
-    mapViz.updateMarkers(data, config)
-    //}
-
-    //if (shownTab == 'chart-tab-by-location'){
-    //  console.log('chart-tab-by-location')
-    chartViz.updateLineChartByLocations(data, config)
-    //}
-
-    //if (shownTab == 'chart-tab-by-indicator'){
-    chartViz.updateLineChartInLocation(data, config)
-    //}
-
-    //if (shownTab == 'chart-tab-by-indicator-heatmap'){
-    chartViz.updateLineChartInLocationHeatmap(data, config)
-    //}
-
-    //if (shownTab == 'table-tab'){
-    tableViz.updateDataTable(data, config)
-    //}       
-
+    updateValueBoxes(data)
+    mapViz.updateMarkers(lrwMap, data, locations)
+    tableViz.updateLrwTable(data)
 }
-
-
 
 function updateEventListeners(data, callback) {
-    selectors.updateDateSliderValues(data)
-    selectors.updateDateSliderOnChange(callback)
-    selectors.updateIndicatorSelectorOnChange(callback)
-    selectors.updateSiteTypeSelectorOnChange(callback)
-    selectors.updateLocationSelectorOnChange(callback)
+    selectors.updateLrwIndicatorSelectorOnChange(data, callback)
+    selectors.updateLrwTableCheckboxOnChange(data, callback)
+
 }
+
 
 
 

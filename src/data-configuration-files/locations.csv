@@ -1,0 +1,117 @@
+location,siteType,lat,lon
+Albury,Inland,-36.0737,146.9135
+Armidale,Inland,-30.29264,151.38147
+Ballina,Coastal,-29.21,153.44
+Balranald,Inland,-34.671,143.58
+Bega,Coastal,-36.6842,149.8401
+Eden,Coastal,-37.1,149.906
+Merimbula,Coastal,-36.8879,149.9064
+Tathra,Coastal,-36.7297,149.9858
+Bellingen,Coastal,-30.4521,152.8971
+Blacktown,Sydney,-33.7668,150.9053
+West Wyalong,Inland,-33.98,147.15
+Blue Mountains,Sydney,-33.3856,150.4865
+Macquarie Marshes,Inland,-30.6959,147.6304
+Bayside,Sydney,-33.9581,151.1986
+Bourke,Inland,-30.0888,145.9378
+Fords Bridge,Inland,-29.7526,145.4248
+Wanaaring,Inland,-29.705,144.1483
+Brewarrina,Inland,-29.9625,146.8611
+Byron Bay,Coastal,-29.01,153.52
+Mullumbimby,Coastal,-28.645,153.515
+Camden,Sydney,-34.066,150.6936
+Canada Bay,Sydney,-33.8652,151.1093
+Concord,Sydney,-33.856,151.1033
+Bankstown,Sydney,-33.9182,151.035
+Cooks River,Sydney,-33.92,151.13
+Earlwood,Sydney,-33.933,151.144
+Central Coast,Coastal,-33.232,151.2173
+Gosford,Coastal,-33.3208,151.2336
+Wyong,Coastal,-33.24,151.418
+Menindee,Inland,-32.4,142.43
+Wilcannia,Inland,-31.56,143.38
+Clarence Valley,Coastal,-29.8784,152.6384
+Maclean,Coastal,-29.4606,153.2019
+Coffs Harbour,Coastal,-30.3,153.1094
+Cowra,Inland,-33.8355,148.6966
+Sydney Olympic Park,Sydney,-33.8465,151.0722
+Deniliquin,Inland,-35.53,144.99
+Batemans Bay,Coastal,-35.7162,150.1795
+Narooma,Coastal,-36.2344,150.0679
+Corowa,Inland,-35.91,146.39
+Forbes,Inland,-33.3799,148.0067
+Georges River,Sydney,-33.9812,151.0748
+Goulburn,Inland,-34.73,149.73
+Griffith,Inland,-34.2801,146.0455
+Cootamundra,Inland,-34.55,147.95
+Gunnedah,Inland,-30.9794,150.2565
+Hawkesbury,Sydney,-33.2263,150.8609
+Hay,Inland,-34.5042,144.8445
+Young,Inland,-34.22,148.31
+Leichhardt,Sydney,-33.8837,151.157
+Delungra,Inland,-29.6541,150.8298
+Kempsey,Coastal,-31.06,152.82
+Millbank,Coastal,-30.83,152.63
+South West Rocks,Coastal,-30.8963,153.0401
+Kiama,Coastal,-34.701,150.833
+Kyogle,Coastal,-28.6254,153.0026
+Condobolin,Inland,-30.3,147.1473
+Lake Cargelligo,Inland,-33.2984,146.374
+Lake Macquarie,Coastal,-33.0311,151.5603
+Leeton,Inland,-34.525,146.399845
+Lismore,Coastal,-28.83,153.28
+Liverpool,Sydney,-33.9286,150.918
+Maitland,Coastal,-32.7316,151.5525
+Forster,Coastal,-32.1796,152.5118
+Gloucester,Coastal,-32.0245,151.9534
+Taree,Coastal,-31.8889,152.444
+Boggabilla,Inland,-28.6053,150.3605
+Moree,Inland,-29.4658,149.8339
+Mathoura,Inland,-35.818,144.912
+Moama,Inland,-36.071,144.724
+Murray Shire,Inland,-35.8,144.9
+Murrumbidgee,Inland,-34.703,145.94
+Macksville,Coastal,-30.7098,152.9162
+Nambucca,Coastal,-30.6665,152.7324
+Narrabri,Inland,-30.3,149.782
+Wee Waa,Inland,-30.2244,149.4392
+Grong Grong,Inland,-34.89,146.78
+Narrandera,Inland,-35.058,146.208
+Narromine,Inland,-32.2328,148.2394
+Newcastle,Coastal,-32.8665,151.7618
+Northern Beaches,Sydney,-33.676,151.2569
+Pittwater,Sydney,-33.6291,151.3016
+Orange,Inland,-33.2816,149.0862
+Parramatta,Sydney,-33.8136,151.0034
+Penrith,Sydney,-33.7507,150.6877
+Lake Cathie,Coastal,-31.72,152.83
+Port Macquarie,Coastal,-31.38,152.9
+Wauchope,Coastal,-31.55,152.64
+Port Stephens,Coastal,-32.7685,151.8409
+Matraville,Sydney,-33.96,151.23
+Casino,Coastal,-28.8584,153.047
+Ryde,Sydney,-33.813,151.105
+Shellharbour,Coastal,-34.5794,150.8665
+Nowra,Coastal,-34.8871,150.6005
+Shoalhaven,Coastal,-35.0536,150.6295
+Ulladulla,Coastal,-35.3572,150.4613
+Homebush,Sydney,-33.864,151.0819
+Sutherland,Sydney,-34.0325,151.0586
+Sydney,Sydney,-33.8688,151.2093
+Sydney Botanical Gardens,Sydney,-33.8642,151.2166
+Tamworth,Inland,-31.09,150.9293
+Temora,Inland,-34.37,147.52
+Baulkham Hills,Sydney,-33.7619,150.9929
+Cumberland State Forest,Sydney,-33.7458,151.0374
+Hills Shire,Sydney,-33.755,151.0128
+Murwillumbah,Coastal,-28.439,153.445
+Tweed Heads,Coastal,-28.256,153.55
+Tibooburra,Inland,-29.4343,142.0101
+Wagga Wagga,Inland,-35.1082,147.3598
+Collarenebri,Inland,-29.5438,148.5758
+Walgett,Inland,-30.03,148.11
+Warren,Inland,-31.7003,147.8359
+Wentworth,Inland,-34.1071,141.9178
+Dubbo,Inland,-32.2444,148.6144
+Wollongong,Coastal,-34.431,150.871
+Yass,Inland,-34.863,148.948

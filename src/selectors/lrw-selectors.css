@@ -1,0 +1,111 @@
+/* Remove things and set height */
+.selectize-control.single .selectize-input,
+.selectize-control.multi .selectize-input {
+    height: 34px;
+    border: 1px solid black !important;
+    text-shadow: unset;
+    border-radius: unset;
+    background-image: unset;
+    background-repeat: unset;
+    box-shadow: unset;
+    padding: 5px;
+}
+
+/* Colour the values in the box */
+/* single */
+.selectize-input>.item {
+    background-color: var(--nsw-brand-dark);
+    color: white;
+    padding: 2px 6px;
+}
+
+/* multi */
+.selectize-control.multi .selectize-input.has-items {
+    padding: 5px 6px
+}
+
+/* remove button pill resize */
+div.selectize-input.items.not-full.has-options.has-items>div {
+    padding: 0 6px;
+}
+
+.selectize-control.multi .selectize-input [data-value] {
+    background-color: var(--nsw-brand-dark);
+    color: white;
+    text-shadow: unset;
+    border-radius: unset;
+    background-image: unset;
+    background-repeat: unset;
+    box-shadow: unset;
+    border: unset;
+}
+
+
+
+.selectize-control.multi .selectize-input [data-value].active {
+    background-color: var(--nsw-brand-dark);
+    background-image: unset;
+    background-repeat: unset;
+}
+
+/* Colour the dropdown */
+.selectize-dropdown .selected {
+    background-color: white;
+    color: black;
+}
+
+.selectize-dropdown .active:not(.selected),
+.selectize-dropdown .active {
+    background-color: var(--nsw-brand-dark);
+    color: white;
+}
+
+.lrw-checkbox {
+    padding-right: 16px;
+    display: flex;
+}
+
+.lrw-checkbox>input {
+    margin-right: 4px;
+}
+
+/* Tooltip */
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-left: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
