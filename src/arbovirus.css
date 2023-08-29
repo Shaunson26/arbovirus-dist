@@ -20,7 +20,7 @@ body {
     background-color: #D7153A !important
 }
 
-.viz-container {
+#page-container {
     max-width: 1400px;
 }
 
@@ -29,26 +29,58 @@ body {
     padding: 16px 0px;
 }
 
-#lrw-visualisation-container {
+.summary-visualisation-container {
     height: 400px;
 }
 
-#lrw-map {
+.summary-map {
     height: 100%;
 }
 
-#lrw-table {
+.summary-table {
     display: none;
     height: 100%;
 }
 
-#lrw-table-flex {
+.latest-table-selectors {
+    display: flex;
+    flex-direction: row;
+}
+
+.summary-table-flex {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: stretch;
 }
 
-#lrw-table-container {
+.summary-table-container {
     height: 100%;
+    font-size: 12px;
 }
+
+.summary-table-container > div {
+    overflow-x: auto;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .latest-table-selectors {
+        flex-direction: column;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .latest-table-selectors {
+        flex-direction: row;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+
+

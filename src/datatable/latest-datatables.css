@@ -1,0 +1,13 @@
+.meow {
+    font-size: 12px;
+}
+
+.dt-button {
+    border: unset !important;
+    border-radius: unset !important;
+    margin: 6px 0px;
+}
+
+.dt-button:focus{
+    outline: 2px solid #D7153A !important;
+}

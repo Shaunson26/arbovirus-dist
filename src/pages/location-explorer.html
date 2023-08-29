@@ -1,0 +1,59 @@
+<div class="w3-container">
+    <p>This page allows to explore virus detections, mosquito abundances and environmental parameters for a given
+        season.</p>
+</div>
+
+<div class="w3-row">
+
+    <div class="w3-quarter w3-container">
+        <label for="location-download-season">Season:</label>
+        <select name="location-download-season" id="location-download-season"></select>
+    </div>
+
+    <div class="w3-threequarter w3-container">
+        <label for="location-selector">Location:</label>
+        <select name="location-selector" id="location-selector"></select>
+    </div>
+</div>
+
+<style>
+    .location-chart {
+        height: 150px;
+        width: 100%;
+        padding-bottom: 16px
+    }
+
+    #detections-matrix-container {
+        height: 200px;
+    }
+</style>
+
+
+<div class="w3-container w3-padding-16">
+
+    <div id = 'detections-matrix-container' class="location-chart w3-margin-bottom">
+        <span>Virus detections</span>
+        <canvas id="detections-matrix"></canvas>
+    </div>
+
+    <div class="location-chart w3-margin-bottom">
+        <span>Virus detections (cumulative)</span>
+        <canvas id="detections"></canvas>
+    </div>
+
+    <div class="location-chart  w3-margin-bottom">
+        <span>Mosquito abundances</span>
+        <canvas id="abundances"></canvas>
+    </div>
+
+    <div class="location-chart  w3-margin-bottom">
+        <span>Rainfall (weekly cumulative)</span>
+        <canvas id="rain"></canvas>
+    </div>
+
+    <div class="location-chart  w3-margin-bottom">
+        <span>Temperature range (average and extremes)</span>
+        <canvas id="temperature"></canvas>
+    </div>
+
+</div>

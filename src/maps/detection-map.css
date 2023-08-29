@@ -1,0 +1,88 @@
+.leaflet-pane {
+    z-index: 1;
+}
+
+.leaflet-top {
+    z-index: 2;
+}
+
+.map-legend {
+    line-height: 18px;
+    color: #555;
+}
+
+.map-legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.info {
+    padding: 6px 8px;
+    font-size: 14px;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: left;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.marker-legend-title {
+    text-align: center;
+}
+
+.map-tooltip-title {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.map-tooltip-link {
+    display: block;
+    margin: 4px 0;
+}
+
+#map-tooltip-table th {
+    min-width: 75px;
+}
+
+#map-tooltip-table,
+#map-tooltip-table th,
+#map-tooltip-table td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#map-tooltip-table th,
+#map-tooltip-table td {
+    padding: 0 4px;
+
+}
+
+#map-tooltip-table tr:nth-child(even) {
+    background-color: Gainsboro;
+}
+
+#map-tooltip-table thead  {
+    text-align: center;
+}
+
+#map-tooltip-table tr td:first-child {
+    text-align: right;
+}
+
+#map-tooltip-table tr td:nth-child(2){
+    text-align: center;
+}
+
+.easyPrintHolder .print-class {
+    background-image: url("../images/print.svg");
+}
+

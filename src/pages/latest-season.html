@@ -1,10 +1,9 @@
 <div class="w3-container">
     <p>These displays provide the latest virus detection results from trapped mosquitos and sentinel chickens.
         Whole grinds of collected mosquitoes are tested for arbovirus nucleic acids to determine the presence
-        of arboviruses in mosquitoes, while chickens are bled for detection of virus antibodies indicating exposure to
-        these viruses.
+        of arboviruses in mosquitoes, while chickens are bled for detection of virus antibodies indicating exposure to these viruses.
     </p>
-    <p>Latest reporting week: <b><span id="lrw-date-value">&nbsp;</span></b></p>
+    <p>Latest season: <b><span id="ls-date-value">&nbsp;</span></b></p>
 </div>
 
 <!-- data display container -->
@@ -14,74 +13,70 @@
 
         <div class="w3-third w3-margin-bottom">
             <div class="w3-card w3-center detection-card">
-                <div class="w3-xlarge" id="lrw-detection-value">&nbsp;</div>
+                <div class="w3-xlarge" id="ls-detection-value">&nbsp;</div>
                 <div>detection(s)</div>
             </div>
         </div>
 
         <div class="w3-third w3-margin-bottom">
             <div class="w3-card w3-center detection-card">
-                <div class="w3-xlarge" id="lrw-location-detections-value">&nbsp;</div>
+                <div class="w3-xlarge" id="ls-location-detections-value">&nbsp;</div>
                 <div>location(s) with detection(s)</div>
             </div>
         </div>
 
         <div class="w3-third w3-margin-bottom">
             <div class="w3-card w3-center detection-card">
-                <div class="w3-xlarge" id="lrw-location-with-data-value">&nbsp;</div>
+                <div class="w3-xlarge" id="ls-location-with-data-value">&nbsp;</div>
                 <div>locations sampled</div>
             </div>
         </div>
 
     </div>
 
-    <div id="lrw-selectors" class="w3-row w3-section">
+    <div id="ls-selectors" class="w3-row w3-section">
 
         <div class="w3-quarter">
             <div class="w3-container">
+                <label for="ls-display" style="display: block;">Display:</label>
 
-                <label for="lrw-display" style="display: block;">Display:</label>
-
-                <select name="lrw-display" id="lrw-display">
+                <select name="ls-display" id="ls-display">
                     <option value="map">Map</option>
                     <option value="table">Table</option>
-
                 </select>
             </div>
         </div>
 
         <div class="w3-threequarter">
             <div class="w3-container">
-
-                <label for="lrw-indicators" style="display: block;">Indicators:<span class="w3-tiny"
+                <label for="ls-indicators" style="display: block;">Indicators:<span class="w3-tiny"
                         style="margin-left: 4px;">Clear selection to select all</span></label>
-                <select name="lrw-indicators" id="lrw-indicators"></select>
-                
+                <select name="ls-indicators" id="ls-indicators"></select>
             </div>
         </div>
 
     </div>
 
-    <div id="lrw-visualisation-container" class="w3-container summary-visualisation-container">
+    <div id="ls-visualisation-container" class="w3-container summary-visualisation-container">
 
-        <div id="lrw-map" class="w3-container summary-map"></div>
+        <div id="ls-map" class="w3-container summary-map"></div>
 
-        <div id="lrw-table" class="summary-table">
+        <div id="ls-table" class="summary-table">
 
             <div class="summary-table-flex">
 
                 <div class="latest-table-selectors" class="w3-margin-bottom">
 
                     <div class="latest-checkbox">
-                        <input type="checkbox" id="lrw-include-counts" name="lrw-include-counts" disabled="true"
+                        <input type="checkbox" id="ls-include-counts" name="ls-include-counts" disabled="true"
                             checked>
-                        <label for="lrw-include-counts"> include mosquito abundances</label>
+                        <label for="ls-include-counts"> include mosquito abundances</label>
                     </div>
 
                     <div class="latest-checkbox">
-                        <input type="checkbox" id="lrw-include-environmental-params"
-                            name="lrw-include-environmental-params" checked disabled="true">
-                        <label for="lrw-include-environmental-params"> include environmental parameters
+                        <input type="checkbox" id="ls-include-environmental-params"
+                            name="ls-include-environmental-params" checked disabled="true">
+                        <label for="ls-include-environmental-params"> include environmental parameters
                             <span class="tooltip"><b><sup>?</sup></b>
                                 <span class="tooltiptext w3-tiny">These function only if an indicator selection is
                                     made.</span>
@@ -90,7 +85,7 @@
                     </div>
 
                 </div>
-                <div id="lrw-table-container" class="summary-table-container"></div>
+                <div id="ls-table-container" class="summary-table-container"></div>
             </div>
 
         </div>

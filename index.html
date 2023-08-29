@@ -12,12 +12,14 @@
     <script type="text/javascript" src="../00_dev/packages/selectize.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../00_dev/packages/selectize.default.min.css" />
     <script type="text/javascript" src="../00_dev/packages/leaflet.js"></script>
-    <link rel="stylesheet" type="text/css" href="../00_dev/packages/leaflet.css" /> -->
-    <!-- <script type="text/javascript" src="../00_dev/packages/leaflet-easyprint_2.1.9_dist_bundle.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../00_dev/packages/leaflet-easyprint_2.1.9_libs_leaflet.min.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../00_dev/packages/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../00_dev/packages/leaflet.css" />
+    <script type="text/javascript" src="../00_dev/packages/leaflet-easyprint_2.1.9_dist_bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../00_dev/packages/leaflet-easyprint_2.1.9_libs_leaflet.min.css" />
+    <link rel="stylesheet" type="text/css" href="../00_dev/packages/datatables.min.css" />
     <script type="text/javascript" src="../00_dev/packages/datatables.min.js"></script>
-    <script type="text/javascript" src="../00_dev/packages/dataTables.pageResize.min.js"></script>  -->
+    <script type="text/javascript" src="../00_dev/packages/dataTables.pageResize.min.js"></script>
+    <script src="../00_dev/packages/chart.umd.min.js"></script>
+    <script src="../00_dev/packages/chartjs-chart-matrix.min.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -29,11 +31,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easyprint@2.1.9/dist/bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easyprint@2.1.9/libs/leaflet.min.css">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.25.1/plotly.min.js" integrity="sha512-BJxOxAwyvENDDMZsR1ZC3BJ/ZJv6x2bzPVWgyvNe9mUGiPhey0xE9wTJ/C+hl2qK9RIm5ACFg+nmSt3NbqIWXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.1/apexcharts.min.js" integrity="sha512-Gpg0M5UOTFSHGglemXUOUzL1LyO8MT0fxmEAjGN8jNlY6oSOsLerF1/vuXrqJXKyV5QIay12trwDDhmRJHZisA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/b-2.4.1/b-html5-2.4.1/datatables.min.css" rel="stylesheet"> 
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/b-2.4.1/b-html5-2.4.1/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.13.6/features/pageResize/dataTables.pageResize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js" integrity="sha256-yNUdbELnNeTiZZpVr1F8fUXCHauRzeh7xjtiIIzjF8Y=" crossorigin="anonymous"></script>
+
 
     <script type="text/javascript" src="./src/w3.js"></script>
     <link rel="stylesheet" href="./src/w3.css">
@@ -48,20 +51,17 @@
     </div>
 
     <!-- page container -->
-    <div class='viz-container w3-container'>
+    <div id="page-container" class='w3-container'>
 
-        <!-- Viz container -->
-        <div class="w3-card-4 w3-margin-bottom">
-
-            <!-- tab container -->
-            <!-- tab navigation -->
-            <div w3-include-html="./src/pages/tab-buttons.html" id="tab-buttons" class="w3-bar nsw-brand-dark"></div>
-
-            <!-- tabs -->
-            <div w3-include-html="./src/pages/latest-week.html" id="latest-tab" class="tab" style="display:unset;"></div>
-            <div id="season-tab" class="tab" style="display:none">SEASON TO-DO</div>
-            <div id="explorer-tab" class="tab" style="display:none">EXPLORER TO-DO</div>
-            <div id="download-tab" class="tab" style="display:none">DOWNLOAD TO-DO</div>
+        <!-- viz container -->
+        <div id="tab-container" class="w3-card-4 w3-margin-bottom">
+            <div id="tab-buttons" w3-include-html="./src/pages/tab-buttons.html"  class="w3-bar nsw-brand-dark"></div>
+            <!-- Ids must match tab-buttons.html ids  -->
+            <div id="latest-week" w3-include-html="./src/pages/latest-week.html"  class="tab" style="display:unset;"></div>
+            <div id="latest-season" w3-include-html="./src/pages/latest-season.html"  class="tab" style="display:none"></div>
+            <div id="location-explorer" w3-include-html="./src/pages/location-explorer.html"  class="tab" style="display:none"></div>
+            <div id="data-download" w3-include-html="./src/pages/data-download.html"  class="tab" style="display:none">
+            </div>
         </div>
 
 
@@ -70,8 +70,9 @@
     <script>w3.includeHTML();</script>
     <script src="./src/index.js" type="module"></script>
 
-
-
+    <!-- The Modal -->
+    <div w3-include-html="./src/pages/download-modal.html"></div>
+   
 </body>
 
 </html>

@@ -1,77 +1,55 @@
 // Initial and constants
-import { jsonColumnToRows, subsetObject, parseCsvText } from "./utils.js"
-import { locations } from "./data-configuration-files/locations.js"
-import * as tabs from "./tabs/tabs.js"
-import * as selectors from "./selectors/lrw-selectors.js"
-import { updateValueBoxes } from "./value-boxes/value-boxes.js"
-import * as mapViz from "./maps/lrw-map.js"
-import * as tableViz from "./datatable/lrw-datatable.js"
+import { fetchData } from "./utils.js"
+import { downloadSeasonOptions } from "./data-configuration-files/season-download-selector-options.js"
+import * as tabs from "./pages/tab-buttons.js"
+import * as latestWeek from "./pages/latest-week.js"
+import * as latestSeason from "./pages/latest-season.js"
+import * as dataDownload from "./pages/data-download.js"
+import * as locationExplorer from "./pages/location-explorer.js"
 
-//tabs.showTab('explorer-tab')
+//tabs.showTab('season-tab')
 //tabs.showTab('chart-tab-by-indicator')
 //tabs.showTab('chart-tab-by-indicator-heatmap')
 
 tabs.initialiseTabButtons()
-var lrwMap = mapViz.initialiseMap()
+dataDownload.makeSeasonSelector('#download-season')
+dataDownload.addDownloadEventListener()
 
 // Initial load
 $(function () {
 
-    getLatestData(function (data) {
-        updateEventListeners(data, updateStuff)
-        updateStuff(data)
+    let latestSeasonValue = downloadSeasonOptions[2].value
+    let latestSeasonPath = `./data/${latestSeasonValue}`
+
+    fetchData([latestSeasonPath], function (data) {        
+
+        let seasonDates = [...new Set(data.map(row => row.report_date))].sort()
+        let latestDate = seasonDates[seasonDates.length - 1]   
+        latestDate = '2021-02-20'
+
+        let latestWeekData = data.filter(row => row.report_date == latestDate)
+
+        latestWeek.updateEventListeners(latestWeekData, latestWeek.updateStuff)
+        latestWeek.updateStuff(latestWeekData)
+
+        //
+        latestSeason.updateEventListeners(data, latestSeason.updateStuff)
+        latestSeason.updateStuff(data)
+
+        locationExplorer.updateEventListeners(data, locationExplorer.updateStuff)
+        locationExplorer.updateStuff(data)
+    
     })
+  
+
+    //tabs.showTab('location-explorer')
+
 
 })
 
-async function getLatestData(callback) {
-    const response = await fetch("./data/latest.csv");
-    let latestData = await response.text();
-    latestData = parseCsvText(latestData)
-    callback(latestData)
-}
-
-function updateStuff(data) {
-
-    let indicatorsSelected = $('#lrw-indicators')[0].selectize.items
-
-    if (indicatorsSelected.length > 0) {
-
-        $('#lrw-include-counts').attr('disabled', false)
-        $('#lrw-include-environmental-params').attr('disabled', false)
-
-        let requireMosCounts = $('#lrw-include-counts')[0].checked
-        let requireEnvParams = $('#lrw-include-environmental-params')[0].checked
-
-        let defaultCols = ['location', 'reportWeek', 'season']
-        let mosCounts = requireMosCounts ? ["total_mosquito", "culex_annulirostris", "aedes_vigilax"] : [];
-        let envParams = requireEnvParams ? ["rain_cumulative", "temperature_max_avg", "temperature_max", "temperature_min_avg", "temperature_min"] : [];
-
-        let keysToSubset =
-            [defaultCols, indicatorsSelected, mosCounts, envParams].reduce((a, c) => a.concat(c), [])
-
-        data =
-            data
-                .map(row => subsetObject(row, keysToSubset))
-    } else {
-
-        $('#lrw-include-counts').attr('disabled', true)
-        $('#lrw-include-counts').prop('checked', true)
-        $('#lrw-include-environmental-params').attr('disabled', true)
-        $('#lrw-include-environmental-params').prop('checked', true)
-    }
 
 
-    updateValueBoxes(data)
-    mapViz.updateMarkers(lrwMap, data, locations)
-    tableViz.updateLrwTable(data)
-}
 
-function updateEventListeners(data, callback) {
-    selectors.updateLrwIndicatorSelectorOnChange(data, callback)
-    selectors.updateLrwTableCheckboxOnChange(data, callback)
-
-}
 
 
 
