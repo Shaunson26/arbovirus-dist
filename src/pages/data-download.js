@@ -2,7 +2,13 @@ import { fetchData, parseCsvText } from "../utils.js"
 import { downloadSeasonOptions } from "../data-configuration-files/season-download-selector-options.js";
 import { updateTable } from "../datatable/latest-datatables.js"
 
-export function makeSeasonSelector(id) {
+
+export function initialize(){
+    makeSeasonSelector('#download-season')
+    addDownloadEventListener()
+}
+
+function makeSeasonSelector(id) {
     let selectize = $(id).selectize({
         plugins: ['remove_button'],
         maxItems: null,
@@ -14,7 +20,7 @@ export function makeSeasonSelector(id) {
     return selectize
 }
 
-export function addDownloadEventListener() {
+function addDownloadEventListener() {
 
     $('#download-season-button').on('click', function () {
         let seasonsToDownload = $('#download-season')[0].selectize.items

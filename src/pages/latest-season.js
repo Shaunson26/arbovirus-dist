@@ -6,15 +6,24 @@ import { updateValueBoxes } from "../value-boxes/value-boxes.js"
 import * as mapViz from "../maps/detection-map.js"
 import * as tableViz from "../datatable/latest-datatables.js"
 
-let $lsIndicatorSelector =
-    selectors.makeIndicatorSelector('ls-indicators')
+export function initialize() {
 
-let $lsDisplaySelector =
-    selectors.makeDisplaySelector('ls-display')
+    let displaySelector =
+        selectors.makeDisplaySelector('ls-display')
 
-var lsMap = mapViz.initialiseMap('ls-map')
+    let indicatorSelector =
+        selectors.makeIndicatorSelector('ls-indicators')
 
-export function updateStuff(data) {
+    var detectionMap = mapViz.initialiseMap('ls-map')
+
+    return {
+        displaySelector: displaySelector,
+        indicatorSelector: indicatorSelector,
+        detectionMap: detectionMap
+    }
+}
+
+export function updateStuff(data, pageObjects) {
 
     let indicatorsSelected = $('#ls-indicators')[0].selectize.items
 
@@ -45,11 +54,11 @@ export function updateStuff(data) {
 
 
     updateValueBoxes(data, 'ls')
-    mapViz.updateMarkers(lsMap, data, locations)
+    mapViz.updateMarkers(pageObjects.detectionMap, data, locations)
     tableViz.updateTable('ls-table-container', data)
 }
 
-export function updateEventListeners(data, callback) {
-    selectors.updateIndicatorSelectorOnChange('#ls-indicators', data, callback)
-    selectors.updateTableCheckboxOnChange(['#ls-include-counts', '#ls-include-environmental-params'], data, callback)
+export function updateEventListeners(data, pageObjects, callback) {
+    selectors.updateIndicatorSelectorOnChange('#ls-indicators', data, pageObjects, callback)
+    selectors.updateTableCheckboxOnChange(['#ls-include-counts', '#ls-include-environmental-params'], data, pageObjects, callback)
 }

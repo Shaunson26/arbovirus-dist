@@ -14,15 +14,24 @@ import { updateValueBoxes } from "../value-boxes/value-boxes.js"
 import * as mapViz from "../maps/detection-map.js"
 import * as tableViz from "../datatable/latest-datatables.js"
 
-let $lrwIndicatorSelector =
-    selectors.makeIndicatorSelector('lrw-indicators')
+export function initialize() {
 
-let $lrwDisplaySelector =
-    selectors.makeDisplaySelector('lrw-display')
+    let displaySelector =
+        selectors.makeDisplaySelector('lrw-display')
 
-var lrwMap = mapViz.initialiseMap('lrw-map')
+    let indicatorSelector =
+        selectors.makeIndicatorSelector('lrw-indicators')
 
-export function updateStuff(data) {
+    var detectionMap = mapViz.initialiseMap('lrw-map')
+
+    return {
+        displaySelector: displaySelector,
+        indicatorSelector: indicatorSelector,
+        detectionMap: detectionMap
+    }
+}
+
+export function updateStuff(data, pageObjects) {
 
     let indicatorsSelected = $('#lrw-indicators')[0].selectize.items
 
@@ -50,11 +59,11 @@ export function updateStuff(data) {
 
 
     updateValueBoxes(data, 'lrw')
-    mapViz.updateMarkers(lrwMap, data, locations)
+    mapViz.updateMarkers(pageObjects.detectionMap, data, locations)
     tableViz.updateTable('lrw-table-container', data)
 }
 
-export function updateEventListeners(data, callback) {
-    selectors.updateIndicatorSelectorOnChange('#lrw-indicators', data, callback)
-    selectors.updateTableCheckboxOnChange(['#lrw-include-counts', '#lrw-include-environmental-params'], data, callback)
+export function updateEventListeners(data, pageObjects, callback) {
+    selectors.updateIndicatorSelectorOnChange('#lrw-indicators', data, pageObjects, callback)
+    selectors.updateTableCheckboxOnChange(['#lrw-include-counts', '#lrw-include-environmental-params'], data, pageObjects, callback)
 }

@@ -4,49 +4,52 @@ import { downloadSeasonOptions } from "./data-configuration-files/season-downloa
 import * as tabs from "./pages/tab-buttons.js"
 import * as latestWeek from "./pages/latest-week.js"
 import * as latestSeason from "./pages/latest-season.js"
-import * as dataDownload from "./pages/data-download.js"
 import * as locationExplorer from "./pages/location-explorer.js"
+import * as dataDownload from "./pages/data-download.js"
 
-//tabs.showTab('season-tab')
-//tabs.showTab('chart-tab-by-indicator')
-//tabs.showTab('chart-tab-by-indicator-heatmap')
-
-tabs.initialiseTabButtons()
-dataDownload.makeSeasonSelector('#download-season')
-dataDownload.addDownloadEventListener()
 
 // Initial load
 $(function () {
 
+    w3.includeHTML(function() {
+        //setTimeout(buildViz, 1000) 
+        buildViz()
+    })
+
+})
+
+function buildViz() {
+
+    tabs.initialiseTabButtons()
+    var lastestWeekObjs = latestWeek.initialize()
+    var lastestSeasonObjs = latestSeason.initialize()
+    locationExplorer.initialize()
+    dataDownload.initialize()
+    
+    //
+
     let latestSeasonValue = downloadSeasonOptions[2].value
     let latestSeasonPath = `./data/${latestSeasonValue}`
 
-    fetchData([latestSeasonPath], function (data) {        
+    fetchData([latestSeasonPath], function (data) {
 
         let seasonDates = [...new Set(data.map(row => row.report_date))].sort()
-        let latestDate = seasonDates[seasonDates.length - 1]   
+        let latestDate = seasonDates[seasonDates.length - 1]
         latestDate = '2021-02-20'
 
         let latestWeekData = data.filter(row => row.report_date == latestDate)
 
-        latestWeek.updateEventListeners(latestWeekData, latestWeek.updateStuff)
-        latestWeek.updateStuff(latestWeekData)
+        latestWeek.updateEventListeners(latestWeekData, lastestWeekObjs, latestWeek.updateStuff)
+        latestWeek.updateStuff(latestWeekData, lastestWeekObjs)
 
-        //
-        latestSeason.updateEventListeners(data, latestSeason.updateStuff)
-        latestSeason.updateStuff(data)
+        latestSeason.updateEventListeners(data, lastestSeasonObjs, latestSeason.updateStuff)
+        latestSeason.updateStuff(data, lastestSeasonObjs)
 
         locationExplorer.updateEventListeners(data, locationExplorer.updateStuff)
         locationExplorer.updateStuff(data)
-    
+
     })
-  
-
-    //tabs.showTab('location-explorer')
-
-
-})
-
+}
 
 
 

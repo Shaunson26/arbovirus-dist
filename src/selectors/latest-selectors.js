@@ -100,14 +100,14 @@ export function makeIndicatorSelector(id) {
     return selectize
 }
 
-export function updateIndicatorSelectorOnChange(id, data, callback) {
+export function updateIndicatorSelectorOnChange(id, data, pageObjects, callback) {
 
     let instance = $(id)[0].selectize
 
     instance.off('change');
 
     instance.on('change', function () {
-        callback(data)
+        callback(data, pageObjects)
     })
 }
 
@@ -128,7 +128,7 @@ export let updateCheckboxes = {
     }
 }
 
-export function updateTableCheckboxOnChange(ids, data, callback) {
+export function updateTableCheckboxOnChange(ids, data, pageObjects, callback) {
 
     let checkboxes = ids.map(id => $(id))
 
@@ -138,7 +138,7 @@ export function updateTableCheckboxOnChange(ids, data, callback) {
 
         checkbox.on('change', function () {
 
-            callback(data)
+            callback(data, pageObjects)
         })
     })
 
