@@ -14,13 +14,17 @@ addCss('detection-map-css', './src/maps/detection-map.css')
 export function initialiseMap(mapContainerId) {
 
     let tiles =
-        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}', {
+            minZoom: 4,
             maxZoom: 8,
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,' +
-                'under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ' +
-                'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ' +
-                'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+            attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>' +
+                '&copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a>' +
+                '&copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy;' +
+                '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            ext: 'png'
         })
+
+
 
     const map =
         L.map(mapContainerId, {
@@ -134,7 +138,7 @@ function summariseByLocation(data) {
                 if (value != null) {
                     acc[key] = (acc[key] || null) + value;
                 }
-                
+
             });
             return acc;
         }, {});
