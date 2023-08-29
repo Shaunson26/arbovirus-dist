@@ -25,6 +25,8 @@ function buildViz() {
     var lastestSeasonObjs = latestSeason.initialize()
     locationExplorer.initialize()
     dataDownload.initialize()
+
+    $(".selectize-input input").attr('readonly','readonly');
     
     //
 
