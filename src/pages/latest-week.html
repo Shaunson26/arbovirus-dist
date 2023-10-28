@@ -1,34 +1,35 @@
 <div class="w3-container">
-    <p>These displays provide the latest virus detection results from trapped mosquitos and sentinel chickens.
-        Whole grinds of collected mosquitoes are tested for arbovirus nucleic acids to determine the presence
-        of arboviruses in mosquitoes, while chickens are bled for detection of virus antibodies indicating exposure to
-        these viruses.
-    </p>
     <p>Latest reporting week: <b><span id="lrw-date-value">&nbsp;</span></b></p>
 </div>
 
-<!-- data display container -->
-<div id="">
+<div class="w3-container" id="mosquito-isolates-week-container">
+
+    <h3>Mosquito isolates</h3>
+
+    <p>These displays provide the latest virus detection results from trapped mosquitos.
+        Whole grinds of collected mosquitoes are tested for arbovirus nucleic acids to determine the presence
+        of arboviruses in mosquitoes
+    </p>
 
     <div id="value-boxes" class="w3-row-padding w3-margin-bottom">
 
         <div class="w3-third w3-margin-bottom">
             <div class="w3-card w3-center detection-card">
-                <div class="w3-xlarge" id="lrw-detection-value">&nbsp;</div>
+                <div class="w3-xlarge" id="lrw-mosquito-detection-value">&nbsp;</div>
                 <div>detection(s)</div>
             </div>
         </div>
 
         <div class="w3-third w3-margin-bottom">
             <div class="w3-card w3-center detection-card">
-                <div class="w3-xlarge" id="lrw-location-detections-value">&nbsp;</div>
+                <div class="w3-xlarge" id="lrw-mosquito-location-detections-value">&nbsp;</div>
                 <div>location(s) with detection(s)</div>
             </div>
         </div>
 
         <div class="w3-third w3-margin-bottom">
             <div class="w3-card w3-center detection-card">
-                <div class="w3-xlarge" id="lrw-location-with-data-value">&nbsp;</div>
+                <div class="w3-xlarge" id="lrw-mosquito-location-with-data-value">&nbsp;</div>
                 <div>locations sampled</div>
             </div>
         </div>
@@ -40,9 +41,106 @@
         <div class="w3-quarter">
             <div class="w3-container">
 
-                <label for="lrw-display" style="display: block;">Display:</label>
+                <label for="lrw-mosquito-display" style="display: block;">Display:</label>
 
-                <select name="lrw-display" id="lrw-display">
+                <select name="lrw-mosquito-display" id="lrw-mosquito-display">
+                    <option value="map">Map</option>
+                    <option value="table">Table</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="w3-threequarter">
+            <div class="w3-container">
+
+                <label for="lrw-mosquito-indicators" style="display: block;">Indicators:<span class="w3-tiny"
+                        style="margin-left: 4px;">Clear selection to select all</span></label>
+                <select name="lrw-mosquito-indicators" id="lrw-mosquito-indicators"></select>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="lrw-visualisation-container" class="w3-container summary-visualisation-container">
+
+        <div id="lrw-mosquito-map" class="w3-container summary-map"></div>
+
+        <div id="lrw-mosquito-table" class="summary-table">
+
+            <div class="summary-table-flex">
+
+                <div class="latest-table-selectors" class="w3-margin-bottom">
+
+                    <div class="latest-checkbox">
+                        <input type="checkbox" id="lrw-mosquito-include-counts" name="lrw-mosquito-include-counts" disabled="true"
+                            checked>
+                        <label for="lrw-mosquito-include-counts"> include mosquito abundances</label>
+                    </div>
+
+                    <div class="latest-checkbox">
+                        <input type="checkbox" id="lrw-mosquito-include-environmental-params"
+                            name="lrw-mosquito-include-environmental-params" checked disabled="true">
+                        <label for="lrw-mosquito-include-environmental-params"> include environmental parameters
+                            <span class="tooltip"><b><sup>?</sup></b>
+                                <span class="tooltiptext w3-tiny">These function only if an indicator selection is
+                                    made.</span>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+                <div id="lrw-mosquito-table-container" class="summary-table-container"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="w3-container" id="sentienl-chickens-week-container">
+
+    <h3>Sentinel chickens</h3>
+    
+    <p>These displays provide the latest virus detection results from sentinel chickens.
+        Chickens are bled for detection of virus antibodies indicating exposure to
+        these viruses.
+    </p>
+
+    <div id="value-boxes" class="w3-row-padding w3-margin-bottom">
+
+        <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-center detection-card">
+                <div class="w3-xlarge" id="lrw-chicken-detection-value">&nbsp;</div>
+                <div>detection(s)</div>
+            </div>
+        </div>
+
+        <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-center detection-card">
+                <div class="w3-xlarge" id="lrw-chicken-location-detections-value">&nbsp;</div>
+                <div>location(s) with detection(s)</div>
+            </div>
+        </div>
+
+        <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-center detection-card">
+                <div class="w3-xlarge" id="lrw-chicken-location-with-data-value">&nbsp;</div>
+                <div>locations sampled</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="lrw-selectors" class="w3-row w3-section">
+
+        <div class="w3-quarter">
+            <div class="w3-container">
+
+                <label for="lrw-chicken-display" style="display: block;">Display:</label>
+
+                <select name="lrw-chicken-display" id="lrw-chicken-display">
                     <option value="map">Map</option>
                     <option value="table">Table</option>
 
@@ -53,9 +151,9 @@
         <div class="w3-threequarter">
             <div class="w3-container">
 
-                <label for="lrw-indicators" style="display: block;">Indicators:<span class="w3-tiny"
+                <label for="lrw-chicken-indicators" style="display: block;">Indicators:<span class="w3-tiny"
                         style="margin-left: 4px;">Clear selection to select all</span></label>
-                <select name="lrw-indicators" id="lrw-indicators"></select>
+                <select name="lrw-chicken-indicators" id="lrw-chicken-indicators"></select>
                 
             </div>
         </div>
@@ -64,24 +162,24 @@
 
     <div id="lrw-visualisation-container" class="w3-container summary-visualisation-container">
 
-        <div id="lrw-map" class="w3-container summary-map"></div>
+        <div id="lrw-chicken-map" class="w3-container summary-map"></div>
 
-        <div id="lrw-table" class="summary-table">
+        <div id="lrw-chicken-table" class="summary-table">
 
             <div class="summary-table-flex">
 
                 <div class="latest-table-selectors" class="w3-margin-bottom">
 
                     <div class="latest-checkbox">
-                        <input type="checkbox" id="lrw-include-counts" name="lrw-include-counts" disabled="true"
+                        <input type="checkbox" id="lrw-chicken-include-counts" name="lrw-chicken-include-counts" disabled="true"
                             checked>
-                        <label for="lrw-include-counts"> include mosquito abundances</label>
+                        <label for="lrw-chicken-include-counts"> include mosquito abundances</label>
                     </div>
 
                     <div class="latest-checkbox">
-                        <input type="checkbox" id="lrw-include-environmental-params"
-                            name="lrw-include-environmental-params" checked disabled="true">
-                        <label for="lrw-include-environmental-params"> include environmental parameters
+                        <input type="checkbox" id="lrw-chicken-include-environmental-params"
+                            name="lrw-chicken-include-environmental-params" checked disabled="true">
+                        <label for="lrw-chicken-include-environmental-params"> include environmental parameters
                             <span class="tooltip"><b><sup>?</sup></b>
                                 <span class="tooltiptext w3-tiny">These function only if an indicator selection is
                                     made.</span>
@@ -90,11 +188,11 @@
                     </div>
 
                 </div>
-                <div id="lrw-table-container" class="summary-table-container"></div>
+                <div id="lrw-chicken-table-container" class="summary-table-container"></div>
             </div>
 
         </div>
 
-    </div>
+    </div> 
 
 </div>

@@ -4,14 +4,16 @@
  * - Leaflet map with markers, legend and tooltips
  */
 
-import { indicatorOptions } from "../selectors/latest-selectors.js";
+import { indicatorOptionsMosquito, indicatorOptionsChicken } from "../selectors/latest-selectors.js";
 import { sumIndicatorValues, jsonToTable, addCss, subsetObject } from "../utils.js";
 import { showTab } from "../pages/tab-buttons.js";
 
 addCss('detection-map-css', './src/maps/detection-map.css')
 
 // How would you make this into a function?
-export function initialiseMap(mapContainerId) {
+export function initialiseMap(id_suffix) {
+
+    const mapContainerId = `${id_suffix}-map`
 
     let tiles =
         L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}', {
@@ -23,8 +25,6 @@ export function initialiseMap(mapContainerId) {
                 '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             ext: 'png'
         })
-
-
 
     const map =
         L.map(mapContainerId, {
@@ -103,16 +103,28 @@ function addPrintButton(map, tiles) {
 
 export function updateMarkers(map, data, locations) {
 
-    // Need to summarise season data
+    // Define which indicator set to use
+    let indicatorOptions;
 
-    data = summariseByLocation(data)
+    if (map._container.id.includes('mosquito')) {
+        indicatorOptions = indicatorOptionsMosquito
+    }
+
+    if (map._container.id.includes('chicken')) {
+        indicatorOptions = indicatorOptionsChicken
+    }
+
+    
+    // Need to summarise season data
+    // unaffected for weekly data
+    data = summariseByLocation(data, indicatorOptions)
 
     let currentDate = data[0].report_date
 
     clearMarkers(map)
 
     let dataWithCoords = mergeLocationCoords(data, locations)
-    let markers = makeMarkers(dataWithCoords)
+    let markers = makeMarkers(dataWithCoords, indicatorOptions)
 
     let markersLayer =
         L.featureGroup(markers,
@@ -122,7 +134,20 @@ export function updateMarkers(map, data, locations) {
 
 }
 
-function summariseByLocation(data) {
+/**
+ * Return array of object of location, report_date, season and indicatorOptions (detections)
+ * 
+ * location: "Bourke"
+ * report_date: "2021-02-20"
+ * sc_japanese_encephalitis: 0
+ * sc_kunjin: 0
+ * sc_murray_valley_encephalitis: 0
+ * season: "2020/2021"
+ * 
+ * @param {*} data 
+ * @returns 
+ */
+function summariseByLocation(data, indicatorOptions) {
 
     let locations = [...new Set(data.map(row => row.location))].sort()
 
@@ -130,7 +155,9 @@ function summariseByLocation(data) {
 
         let locationData = data.filter(row => row.location == location);
 
-        const indicatorKeys = indicatorOptions.map(row => row.value);
+        let indicatorKeys = indicatorOptions.map(row => row.value);
+
+        indicatorKeys = indicatorKeys.concat(['total_mosquito', 'culex_annulirostris', 'aedes_vigilax'])
 
         const indicatorSums = locationData.reduce((acc, obj) => {
             indicatorKeys.forEach(key => {
@@ -241,7 +268,7 @@ function makeTooltip(data) {
 
 }
 
-function makePopup(data) {
+function makePopup(data, indicatorOptions) {
 
     let toolTipTableObject =
         indicatorOptions.map((row, i) => {
@@ -252,17 +279,29 @@ function makePopup(data) {
             return obj
         }).filter(row => row.Result != null)
 
+    let zz =
+        ['total_mosquito', 'culex_annulirostris', 'aedes_vigilax'].map((value) => {
+            let obj = {
+                Mosquito: value,
+                Abundance: data[value]
+            }
+            return obj
+        })
 
     let toolTipTable = jsonToTable(toolTipTableObject, 'map-tooltip-table')
+    let mosquitoAbundanceTable = jsonToTable(zz, 'map-tooltip-table')
 
     let div = document.createElement('div')
-    //div.addEventListener('click', goToChart)
+    let spanClasses = "map-tooltip-link w3-button nsw-brand-dark nsw-brand-accent-hover"
+
     div.innerHTML =
         `<span class='map-tooltip-title'>${data.location}</span>` +
         toolTipTable +
-        `<span class='map-tooltip-link w3-button' data-location="${data.location}" data-season="${data.season}">Examine in location explorer ...</span>`
+        "</br>" +
+        mosquitoAbundanceTable +
+        `<span class="${spanClasses}" data-location="${data.location}" data-season="${data.season}">See full season results</span>`
 
-    div.children[2].addEventListener('click', goToLocationExplorer)
+    div.children[3].addEventListener('click', goToLocationExplorer)
 
     return div
 }
@@ -288,7 +327,7 @@ function mouseout(e, style) {
     e.target.setStyle(style)
 }
 
-function makeMarkers(data) {
+function makeMarkers(data, indicatorOptions) {
 
     let markers =
         data.map(mergedData => {
@@ -300,7 +339,7 @@ function makeMarkers(data) {
             let style = markerStyle(indicatorSum)
             marker.setStyle(style)
             marker.bindTooltip(makeTooltip(mergedData))
-            marker.bindPopup(makePopup(mergedData))
+            marker.bindPopup(makePopup(mergedData, indicatorOptions))
             marker.on('popupopen', function (e) {
                 marker.closeTooltip()
             });
@@ -316,6 +355,16 @@ function makeMarkers(data) {
     return markers
 
 }
+
+/**
+ * Merge location coordinate data onto data
+ * 
+ * Only locations within data are returned
+ * 
+ * @param {Array} data array of objects with location slot 
+ * @param {Array} locations array of objects with location, lat and lon slots 
+ * @returns 
+ */
 function mergeLocationCoords(data, locations) {
 
     //console.log('locations:', locations, 'data:', data)

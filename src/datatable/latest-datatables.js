@@ -2,15 +2,21 @@ import { jsonToTable, addCss } from "../utils.js";
 
 addCss('latest-datatable-css', './src/datatable/latest-datatables.css')
 
-export function updateTable(id, data) {
+/**
+ * Create a datatable
+ * @param {} id_suffix suffix to link related items
+ * @param {*} data 
+ */
+export function updateTable(id_suffix, data) {
 
     if (typeof data === 'undefined') {
         throw new Error('Missing argument: "data" is required.');
     }
 
-    let innerTableId = id + '-data-table'
+    const tableId = `${id_suffix}-table-container`,
+        innerTableId = tableId + '-data-table'
 
-    $(`#${id}`).html(jsonToTable(data, innerTableId));
+    $(`#${tableId}`).html(jsonToTable(data, innerTableId));
 
     let table = document.querySelector(`#${innerTableId}`)
 
@@ -32,6 +38,6 @@ export function updateTable(id, data) {
     });
 }
 
-export function triggerDataTablePageResize(id){
-    $(`${id}>object`)[0].contentDocument.defaultView.dispatchEvent(new Event('resize'))
+export function triggerDataTablePageResize(tableId) {
+    $(`${tableId}>object`)[0].contentDocument.defaultView.dispatchEvent(new Event('resize'))
 }

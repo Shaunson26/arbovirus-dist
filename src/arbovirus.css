@@ -35,6 +35,8 @@ body {
 
 .summary-map {
     height: 100%;
+    max-width: 800px;
+    margin: auto;
 }
 
 .summary-table {

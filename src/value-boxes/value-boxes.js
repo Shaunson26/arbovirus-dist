@@ -1,31 +1,48 @@
 import { sumIndicatorValues } from "../utils.js"
-import { indicatorOptions } from "../selectors/latest-selectors.js"
+import { indicatorOptionsMosquito, indicatorOptionsChicken } from "../selectors/latest-selectors.js"
 
-export function updateValueBoxes(data, page) {
+export function updateReportDate(data, id) {
+    $(`#${id}`).text(data[0].report_date)
+}
 
-    let numberOfDetections = getTotalNumberOfDetections(data)
-    let numberOfLocationsWithDetections = getLocationsWithDetections(data).length
-    let numberOfLocationsWithData = getLocationsWithData(data).length
+/**
+ * Update value boxes using prefix-suffix matching
+ * 
+ * @param {Object} data 
+ * @param {String} id_suffix 
+ */
+export function updateValueBoxes(data, id_suffix) {
 
-    if (page == 'lrw') {
-        $('#lrw-date-value').text(data[0].report_date)
-        $('#lrw-detection-value').text(numberOfDetections)
-        $('#lrw-location-detections-value').text(numberOfLocationsWithDetections)
-        $('#lrw-location-with-data-value').text(numberOfLocationsWithData)
+    let indicatorNames;
+
+    if (id_suffix.includes('mosquito')){
+        indicatorNames = indicatorOptionsMosquito.map(row => row.value)
     }
 
-    if (page == 'ls') {
-        $('#ls-date-value').text(data[0].season)
-        $('#ls-detection-value').text(numberOfDetections)
-        $('#ls-location-detections-value').text(numberOfLocationsWithDetections)
-        $('#ls-location-with-data-value').text(numberOfLocationsWithData)
+    if (id_suffix.includes('chicken')){
+        indicatorNames = indicatorOptionsChicken.map(row => row.value)
     }
+
+    let numberOfDetections = getTotalNumberOfDetections(data, indicatorNames)
+    let numberOfLocationsWithDetections = getLocationsWithDetections(data, indicatorNames).length
+    let numberOfLocationsWithData = getLocationsWithData(data, indicatorNames).length
+
+    //console.log(numberOfDetections, numberOfLocationsWithDetections, numberOfLocationsWithData)
+
+    $(`#${id_suffix}-detection-value`).text(numberOfDetections)
+    $(`#${id_suffix}-location-detections-value`).text(numberOfLocationsWithDetections)
+    $(`#${id_suffix}-location-with-data-value`).text(numberOfLocationsWithData)
 
 }
 
-let indicatorNames = indicatorOptions.map(row => row.value)
+/**
+ * 
+ * @param {*} data 
+ * @param {*} indicatorNames 
+ * @returns 
+ */
 
-function getTotalNumberOfDetections(data) {
+function getTotalNumberOfDetections(data, indicatorNames) {
 
     let locationDetections = data.map(row => {
         return sumIndicatorValues(row, indicatorNames)
@@ -37,7 +54,7 @@ function getTotalNumberOfDetections(data) {
     return totalDetections
 }
 
-function getLocationsWithDetections(data) {
+function getLocationsWithDetections(data,indicatorNames) {
 
     let locationDetections =
         data.map(row => {
@@ -55,7 +72,7 @@ function getLocationsWithDetections(data) {
 
 }
 
-function getLocationsWithData(data) {
+function getLocationsWithData(data, indicatorNames) {
 
     let locationWithData =
         data.map(row => {

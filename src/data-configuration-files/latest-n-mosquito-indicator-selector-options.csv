@@ -1,0 +1,11 @@
+value,label,optgroup
+mos_sindbis,sindbis,eg_Public health concern
+mos_ross_river,ross river,eg_Public health concern
+mos_kunjin,kunjin,eg_Other
+mos_edge_hill,edge hill,eg_Other
+mos_barmah_forest,barmah forest,eg_Other
+mos_stratford,stratford,eg_Other
+mos_kokobera,kokobera,eg_Other
+mos_unknown,unknown,eg_Other
+mos_murray_valley_encephalitis,murray valley encephalitis,eg_Public health concern
+mos_japanese_enc,japanese enc,eg_Public health concern

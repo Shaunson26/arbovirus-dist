@@ -88,6 +88,8 @@ export function updateChartMatrix(data) {
 
     data = data.filter(row => row.location == locationSelected[0])
 
+    console.log(data)
+
     let report_dates = uniqueArray(data, 'report_date')
     let indicators = indicatorOptions.map(row => row.value)
     // x = report_date, y = indicator, v = detection

@@ -11,44 +11,34 @@ import { triggerDataTablePageResize } from "../datatable/latest-datatables.js";
 addCss('latest-selectors-css', './src/selectors/latest-selectors.css')
 
 // Fetch options
-const response = await fetch("./src/data-configuration-files/latest-n-indicator-selector-options.csv");
-const indicatorOptionsText = await response.text();
-export let indicatorOptions = parseCsvText(indicatorOptionsText)
-
-
-let optgroups = indicatorOptions.map(row => row.optgroup)
-optgroups = [...new Set(optgroups)].map(value => ({ groupName: value }))
-
-/**
- * Selector for display of map or table
- * @param {} id 
- * @returns 
- */
-let displayIds = {
-    lrw: {
-        mapDivId: '#lrw-map',
-        tableDivId: '#lrw-table',
-        tableDivContainerId: '#lrw-table-container',
-    },
-    ls: {
-        mapDivId: '#ls-map',
-        tableDivId: '#ls-table',
-        tableDivContainerId: '#ls-table-container',
-    }
+async function getIndicatorOptions(file) {
+    const response = await fetch(file);
+    const indicatorOptionsText = await response.text();
+    const indicatorOptions = parseCsvText(indicatorOptionsText)
+    return indicatorOptions
 }
 
+export let indicatorOptions = await getIndicatorOptions('./src/data-configuration-files/latest-n-indicator-selector-options-mosquito.csv')
+export let indicatorOptionsMosquito = await getIndicatorOptions('./src/data-configuration-files/latest-n-indicator-selector-options-mosquito.csv')
+export let indicatorOptionsChicken = await getIndicatorOptions('./src/data-configuration-files/latest-n-indicator-selector-options-chicken.csv')
+
 /**
- * Make a selector for display of map or table.
- * @param {String} id id of the <select> element, XXX-display
+ * Make a selector for display of map or table that toggles the display
+ * of the associated map and table divs with the same id_suffix
+ * 
+ * @param {String} id_suffix id suffix of the related elements e.g. lrw-mosquito
  * @returns 
  */
-export function makeDisplaySelector(id) {
+export function makeDisplaySelector(id_suffix) {
 
-    let idPrefix = id.replace('-display', '')
+    const displaySelectorId = `#${id_suffix}-display`,
+        mapDivId = `#${id_suffix}-map`,
+        tableDivId = `#${id_suffix}-table`,
+        tableDivContainerId = `#${id_suffix}-table-container`
 
-    const { mapDivId, tableDivId, tableDivContainerId} = displayIds[idPrefix]
+    //console.log(displaySelectorId, mapDivId, tableDivId)
 
-    let selectize = $(`#${id}`).selectize({
+    let selectize = $(displaySelectorId).selectize({
         dropdownParent: 'body',
         onChange: function () {
 
@@ -78,9 +68,27 @@ export function makeDisplaySelector(id) {
  * @param {String} id 
  * @returns 
  */
-export function makeIndicatorSelector(id) {
+export function makeIndicatorSelector(id_suffix) {
 
-    let selectize = $(`#${id}`).selectize({
+    const indicatorSelectorId = `#${id_suffix}-indicators`
+
+    // Wrangle options for selectize
+    let options, optgroups;
+
+    if (id_suffix.includes('mosquito')) {
+        options = indicatorOptionsMosquito
+        optgroups = options.map(row => row.optgroup)
+        optgroups = [...new Set(optgroups)].map(value => ({ groupName: value }))
+    }
+
+    if (id_suffix.includes('chicken')) {
+        options = indicatorOptionsChicken
+        optgroups = options.map(row => row.optgroup)
+        optgroups = [...new Set(optgroups)].map(value => ({ groupName: value }))
+    }
+
+    // Selectize call
+    let selectize = $(indicatorSelectorId).selectize({
         placeholder: 'All selected',
         plugins: ['remove_button'],
         maxItems: null,
@@ -90,7 +98,7 @@ export function makeIndicatorSelector(id) {
         optgroupLabelField: 'groupName', // refers to the label field in "optgroups"
         optgroupValueField: 'groupName',
         optgroupField: 'optgroup',
-        options: indicatorOptions,
+        options: options,
         onChange: function () {
             console.log(this.items)
         }
@@ -100,9 +108,22 @@ export function makeIndicatorSelector(id) {
     return selectize
 }
 
-export function updateIndicatorSelectorOnChange(id, data, pageObjects, callback) {
+/**
+ * Update the callback of a selector. The callback is updateStuff with given params.
+ * The indicators can change over the selection of the data .. hence this is needed.
+ * 
+ * Can this be fixed to only include id, data and callback
+ * 
+ * @param {*} id 
+ * @param {*} data 
+ * @param {*} pageObjects 
+ * @param {*} callback 
+ */
+export function updateIndicatorSelectorOnChange(id_suffix, data, pageObjects, callback) {
 
-    let instance = $(id)[0].selectize
+    const selectorId = `#${id_suffix}-indicators`
+
+    let instance = $(selectorId)[0].selectize
 
     instance.off('change');
 
@@ -114,30 +135,38 @@ export function updateIndicatorSelectorOnChange(id, data, pageObjects, callback)
 /**
  * Toggle checkboxes, used with datatable.
  */
-let checkboxIds = {
-    "lrw": ['#lrw-include-counts', '#lrw-include-environmental-params'],
-    "ls": ['#ls-include-counts', '#ls-include-environmental-params']
-}
+export function updateCheckboxes(id_suffix, todo) {
 
-export let updateCheckboxes = {
-    enable: function (id) {
-        checkboxIds[id].forEach(checkboxId => $(checkboxId).attr('disabled', false))
-    },
-    disable: function (id) {
-        checkboxIds[id].forEach(checkboxId => $(checkboxId).attr('disabled', true).prop('checked', true))
+    let checkboxIds = [
+        `#${id_suffix}-include-counts`,
+        `#${id_suffix}-include-environmental-params`
+    ]
+
+    //console.log(checkboxIds)
+
+    if (todo == 'enable') {
+        checkboxIds.forEach(checkboxId => $(checkboxId).attr('disabled', false))
+    }
+
+    if (todo === 'disable') {
+
+        checkboxIds.forEach(checkboxId => $(checkboxId).attr('disabled', true).prop('checked', true))
     }
 }
 
-export function updateTableCheckboxOnChange(ids, data, pageObjects, callback) {
+export function updateTableCheckboxOnChange(id_suffix, data, pageObjects, callback) {
 
-    let checkboxes = ids.map(id => $(id))
+    let checkboxes = [
+        $(`#${id_suffix}-include-counts`),
+        $(`#${id_suffix}-include-environmental-params`)
+    ]
 
     checkboxes.forEach(checkbox => {
 
         checkbox.off('change');
 
         checkbox.on('change', function () {
-
+            console.log('clicked')
             callback(data, pageObjects)
         })
     })
